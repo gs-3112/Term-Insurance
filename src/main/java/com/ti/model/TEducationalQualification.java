@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,12 +31,12 @@ import lombok.Setter;
 public class TEducationalQualification {
 
 	@Id
-	@Column(name = "eduQualId")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer eduQualId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_educational_qualification_seq_gen")
+	@SequenceGenerator(name = "t_educational_qualification_seq_gen", sequenceName = "t_educational_qualification_seq")
+	private Integer id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "customer_id")
 	private TCustomer customer;
 	
 	@Column(name="educationalQuali")

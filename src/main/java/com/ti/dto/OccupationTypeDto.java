@@ -28,7 +28,7 @@ public class OccupationTypeDto {
 	boolean active;
 
 	public OccupationTypeDto(TOccupationType t) {
-		occupationId = t.getOccupationId();
+		occupationId = t.getId();
 		occupationType = t.getOccupationType();
 		state = t.getState();
 		active = t.isActive();

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.ti.dao.CustomerRepository;
 import com.ti.dao.EducationalQualRepository;
@@ -15,7 +16,6 @@ import com.ti.dao.OccupationTypeRepository;
 import com.ti.dao.TermInsuranceRepository;
 import com.ti.dto.OccupationTypeDto;
 import com.ti.dto.TermInsuranceDetailsDto;
-import com.ti.exception.ApplicationException;
 import com.ti.mapper.TermInsuranceMapper;
 import com.ti.model.TCustomer;
 import com.ti.model.TEducationalQualification;
@@ -48,7 +48,7 @@ public class TermInsuranceService implements ITermInsuranceService{
 
 		List<TermInsuranceDetailsDto> list = tiRepo.findByCustomerId(customerId).stream().map(TermInsuranceDetailsDto::new).collect(Collectors.toList());
 		if(list == null) {
-			throw new ApplicationException(HttpStatus.BAD_REQUEST, "NO DATA FOUND", list);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"NO DATA FOUND");
 		}
 		
 		return list;
@@ -62,22 +62,26 @@ public class TermInsuranceService implements ITermInsuranceService{
 	 */
 	public TermInsuranceDetailsDto addTermInsuranceDetails(TLICustTermInsurance termInsuranceDetails) {
 		if(termInsuranceDetails == null) {
-			throw new ApplicationException(HttpStatus.BAD_REQUEST, "INPUT IS NULL", termInsuranceDetails);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"INPUT IS NULL");
 		}		
 		if(termInsuranceDetails.getCustomer() == null) {
-			
-			throw new ApplicationException(HttpStatus.BAD_REQUEST, "NO CUSTOMER FOUND", termInsuranceDetails.getCustomer());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"NO CUSTOMER FOUND");
 		}
 
+		System.out.println("before calling customerepo ::"+termInsuranceDetails.getCustomer().getId());
 		Optional<TCustomer> customer = customerRepo.findById(termInsuranceDetails.getCustomer().getId());
-		Optional<TEducationalQualification> eduQual = eduQualRepository.findById(termInsuranceDetails.getEduQualId().getEduQualId());
-		Optional<TOccupationType> occupation = occupationRepo.findById(termInsuranceDetails.getOccupationId().getOccupationId());
+		System.out.println("after customerrepo ::"+customer.isEmpty());
+		Optional<TEducationalQualification> eduQual = eduQualRepository.findById(termInsuranceDetails.getEduQualId().getId());
+		Optional<TOccupationType> occupation = occupationRepo.findById(termInsuranceDetails.getOccupationId().getId());
 				
-		if(customer.isEmpty() || eduQual.isEmpty() || occupation.isEmpty()) {
-			throw new ApplicationException(HttpStatus.BAD_REQUEST, "BAD_REQUEST", customer);
+		if(customer.isEmpty()) System.out.println("customer empty");
+		if(eduQual.isEmpty()) System.out.println("Edu empty");
+		if(occupation.isEmpty()) System.out.println("occu empty");
+		if(customer.isEmpty() || eduQual.isEmpty() || occupation.isEmpty()) {			
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"BAD_REQUEST");
 		}
 		
-		termInsuranceDetails.setId(customer.get());	
+		termInsuranceDetails.setCustomer(customer.get());	
 		termInsuranceDetails.setEduQualId(eduQual.get());
 		termInsuranceDetails.setOccupationId(occupation.get());
 		termInsuranceDetails.setCreatedBy(termInsuranceDetails.getCustomer().getFirstName());
@@ -96,7 +100,7 @@ public class TermInsuranceService implements ITermInsuranceService{
 	public List<OccupationTypeDto> getAllOccupations() {
 		List<OccupationTypeDto> list = occupationRepo.findAll().stream().map(OccupationTypeDto::new).collect(Collectors.toList());
 		if(list == null || list.isEmpty()) {
-			throw new ApplicationException(HttpStatus.NO_CONTENT, "NO OCCUPATIONS FOUND", "");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"NO OCCUPATIONS FOUND");
 		}
 		return list;
 	}
@@ -115,12 +119,12 @@ public class TermInsuranceService implements ITermInsuranceService{
 		TLICustTermInsurance obj = tiRepo.getReferenceById(termplanid);
 		
 		if(obj == null) {
-			throw new ApplicationException(HttpStatus.BAD_REQUEST, "INVALID_TERM_PLAN_ID", termplanid);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"INVALID_TERM_PLAN_ID");			
 		}
 		
 		TCustomer customer = obj.getCustomer();
 		if(customer == null) {
-			throw new ApplicationException(HttpStatus.BAD_REQUEST, "NO CUSTOMER FOUND", obj.getCustomer());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"NO CUSTOMER FOUND");			
 		}
 		
 		tliInsurance.setModifiedBy(obj.getCustomer().getFirstName());

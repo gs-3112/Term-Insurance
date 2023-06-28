@@ -14,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +23,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -33,9 +32,9 @@ import lombok.Setter;
 public class TOccupationType {
 
 	@Id
-	@Column(name = "occupationId")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer occupationId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_occupation_type_seq_gen")
+	@SequenceGenerator(name = "t_occupation_type_seq_gen", sequenceName = "t_occupation_type_seq")
+	private Integer id;
 
 	@Column(name = "occupationType")
 	private String occupationType;
@@ -60,14 +59,8 @@ public class TOccupationType {
 	@Column(name = "active")
 	boolean active;
 
-	public Integer getOccupationId() {
-		return occupationId;
-	}
-
-	public void setOccupationId(Integer occupationId) {
-		this.occupationId = occupationId;
-	}
-
+	
+	
 	public String getOccupationType() {
 		return occupationType;
 	}
@@ -122,6 +115,14 @@ public class TOccupationType {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

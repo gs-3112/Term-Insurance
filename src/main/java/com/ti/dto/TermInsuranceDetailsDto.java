@@ -46,7 +46,7 @@ public class TermInsuranceDetailsDto {
 	
 	
 	public TermInsuranceDetailsDto(TLICustTermInsurance ti) {
-		this.custTermInsID = ti.getCustTermInsID();
+		this.custTermInsID = ti.getId();
 		this.customer = ti.getCustomer();
 		this.insuredFor = ti.getInsuredFor();
 		this.existingCover = ti.getExistingCover();
@@ -59,7 +59,7 @@ public class TermInsuranceDetailsDto {
 		
 		TOccupationType ot = ti.getOccupationId();
 		OccupationTypeDto otd = new OccupationTypeDto();
-		otd.setOccupationId(ot.getOccupationId());
+		otd.setOccupationId(ot.getId());
 		otd.setOccupationType(ot.getOccupationType());
 		otd.setState(ot.getState());
 		otd.setActive(ot.isActive());
@@ -68,7 +68,7 @@ public class TermInsuranceDetailsDto {
 		TEducationalQualification eq = ti.getEduQualId();
 		EducationalQualificationDto eqd = new EducationalQualificationDto();
 		eqd.setEducationalQuali(eq.getEducationalQuali());
-		eqd.setEducationalQualiId(eq.getEduQualId());
+		eqd.setEducationalQualiId(eq.getId());
 		eqd.setActive(eq.isActive());
 		this.eduQualId = eqd;
 		

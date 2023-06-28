@@ -14,7 +14,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +25,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @AllArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -33,13 +33,13 @@ import lombok.Setter;
 @Table(name="T_Cust_Term_Insurance")
 public class TLICustTermInsurance {
 
-	@Id
-	@Column(name="custTermInsID", nullable = false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer custTermInsID;
+	@Id 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_cust_term_insurance_seq_gen")
+	@SequenceGenerator(name = "t_cust_term_insurance_seq_gen", sequenceName = "t_cust_term_insurance_seq")
+	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customerId")
 	private TCustomer customer;
 
 	@Column(name="insuredFor")
@@ -54,12 +54,12 @@ public class TLICustTermInsurance {
 	@Column(name="annualIncome")
 	private Double annualIncome;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="eduQualId")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="eduQualId_id")
 	private TEducationalQualification eduQualId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="occupationId")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="occupationId_id")
 	private TOccupationType occupationId;
 	
 	@Column(name="locationPin")
@@ -106,19 +106,19 @@ public class TLICustTermInsurance {
 	@Column(name="active", nullable = false)
 	boolean active;
 
-	public Integer getCustTermInsID() {
-		return custTermInsID;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCustTermInsID(Integer custTermInsID) {
-		this.custTermInsID = custTermInsID;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public TCustomer getCustomer() {
 		return customer;
 	}
 
-	public void setId(TCustomer customer) {
+	public void setCustomer(TCustomer customer) {
 		this.customer = customer;
 	}
 
@@ -272,8 +272,16 @@ public class TLICustTermInsurance {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
-	}	
-	
+	}
+
+	public Double getAnnualIncome() {
+		return annualIncome;
+	}
+
+	public void setAnnualIncome(Double annualIncome) {
+		this.annualIncome = annualIncome;
+	}
+
 	
 	
 }

@@ -35,15 +35,15 @@ public class TermInsuranceMapper {
 	
 	public static TermInsuranceDetailsDto mapEntityToDto(TLICustTermInsurance entity) {
 		TermInsuranceDetailsDto dto = TermInsuranceDetailsDto.builder()
-				.custTermInsID(entity.getCustTermInsID())
+				.custTermInsID(entity.getId())
 				.customer(entity.getCustomer())
 				.eduQualId(EducationalQualificationDto.builder()
-						.educationalQualiId(entity.getEduQualId().getEduQualId())
+						.educationalQualiId(entity.getEduQualId().getId())
 						.educationalQuali(entity.getEduQualId().getEducationalQuali())
 						.isActive(entity.getEduQualId().isActive())
 						.build())
 				.occupationId(OccupationTypeDto.builder()
-						.occupationId(entity.getOccupationId().getOccupationId())
+						.occupationId(entity.getOccupationId().getId())
 						.occupationType(entity.getOccupationId().getOccupationType())
 						.createdBy(entity.getOccupationId().getCreatedBy())
 						.createDate(entity.getOccupationId().getCreatedDate())

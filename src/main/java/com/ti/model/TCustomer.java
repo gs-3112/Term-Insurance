@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,13 +20,12 @@ import lombok.NoArgsConstructor;
 public class TCustomer {
 
 	@Id
-	@Column(name = "id",nullable = false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_customer_seq_gen")
+	@SequenceGenerator(name = "t_customer_seq_gen", sequenceName = "t_customer_seq")
 	private Integer id;
 
 	public Integer getId() {
 		return id;
-
 	}
 
 	@Column(name = "MobileNumber")

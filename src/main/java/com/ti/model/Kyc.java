@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,12 +20,12 @@ import jakarta.persistence.Table;
 public class Kyc {
 	
 	@Id
-	@Column(name="id", nullable = false)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE )	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_kyc_seq_gen")
+	@SequenceGenerator(name = "t_kyc_seq_gen", sequenceName = "t_kyc_seq")
 	Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "customer_id")
 	TCustomer customer;
 	
 	@Column(name="permanentAddress")
