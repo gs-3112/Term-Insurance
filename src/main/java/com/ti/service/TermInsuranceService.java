@@ -14,6 +14,7 @@ import com.ti.dao.CustomerRepository;
 import com.ti.dao.EducationalQualRepository;
 import com.ti.dao.OccupationTypeRepository;
 import com.ti.dao.TermInsuranceRepository;
+import com.ti.dto.EducationalQualificationDto;
 import com.ti.dto.OccupationTypeDto;
 import com.ti.dto.TermInsuranceDetailsDto;
 import com.ti.mapper.TermInsuranceMapper;
@@ -131,6 +132,15 @@ public class TermInsuranceService implements ITermInsuranceService{
 		if(tliInsurance.getSelectedCover() != null) {
 			obj.setSelectedCover(tliInsurance.getSelectedCover());
 		}
+	}
+
+	@Override
+	public List<EducationalQualificationDto> getAllEducationalQualifications() {
+		List<EducationalQualificationDto> list = eduQualRepository.findAll().stream().map(EducationalQualificationDto::new).collect(Collectors.toList());
+		if(list == null || list.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"NO EDUCATIONAL QUALIFICATIONS FOUND");
+		}
+		return list;
 	}
 		
 }

@@ -5,6 +5,8 @@ import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.ti.model.TEducationalQualification;
+import com.ti.model.TOccupationType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +22,14 @@ public class EducationalQualificationDto {
 	Integer educationalQualiId;
 	String educationalQuali;	
 	boolean isActive;
+	
+	public EducationalQualificationDto(TEducationalQualification t) {
+		educationalQualiId = t.getId();
+		educationalQuali = t.getEducationalQuali();
+		isActive = t.isActive();
+	}
+
+
 	
 	public Integer getEducationalQualiId() {
 		return educationalQualiId;

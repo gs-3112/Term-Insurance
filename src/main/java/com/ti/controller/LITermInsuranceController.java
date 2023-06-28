@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ti.dto.EducationalQualificationDto;
 import com.ti.dto.OccupationTypeDto;
 import com.ti.dto.TermInsuranceDetailsDto;
 import com.ti.model.TLICustTermInsurance;
@@ -41,6 +42,11 @@ public class LITermInsuranceController {
 	@GetMapping("/occupations")
 	public List<OccupationTypeDto> getAllOccupations() {
 		return tiService.getAllOccupations();
+	}
+	
+	@GetMapping("/qualifications")
+	public List<EducationalQualificationDto> getAllEducationalQualifications() {
+		return tiService.getAllEducationalQualifications();
 	}
 
 }

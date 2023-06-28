@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ti.DemoApplication;
+import com.ti.TermPlanApplication;
 import com.ti.controller.LITermInsuranceController;
 import com.ti.dto.OccupationTypeDto;
 import com.ti.dto.TermInsuranceDetailsDto;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.hamcrest.Matchers.aMapWithSize;
 
-@SpringBootTest(classes=DemoApplication.class, webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes=TermPlanApplication.class, webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TermInsuranceControllerTest {
 
     private MockMvc mockMvc;
