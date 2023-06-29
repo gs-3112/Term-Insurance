@@ -14,6 +14,7 @@ import com.ti.dao.CustomerRepository;
 import com.ti.dao.EducationalQualRepository;
 import com.ti.dao.OccupationTypeRepository;
 import com.ti.dao.TermInsuranceRepository;
+import com.ti.dto.CalculationResultDto;
 import com.ti.dto.EducationalQualificationDto;
 import com.ti.dto.OccupationTypeDto;
 import com.ti.dto.TermInsuranceDetailsDto;
@@ -37,6 +38,9 @@ public class TermInsuranceService implements ITermInsuranceService{
 	
 	@Autowired
 	EducationalQualRepository eduQualRepository;
+	
+	@Autowired
+	TermPlanCalculator calculator;
 	
 	/**
 	 * This method is used to get term insurance details for given customer.
@@ -69,15 +73,12 @@ public class TermInsuranceService implements ITermInsuranceService{
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"NO CUSTOMER FOUND");
 		}
 
-		System.out.println("before calling customerepo ::"+termInsuranceDetails.getCustomer().getId());
+		CalculationResultDto calculation = calculator.insuranceCalculator(termInsuranceDetails);
+		
 		Optional<TCustomer> customer = customerRepo.findById(termInsuranceDetails.getCustomer().getId());
-		System.out.println("after customerrepo ::"+customer.isEmpty());
 		Optional<TEducationalQualification> eduQual = eduQualRepository.findById(termInsuranceDetails.getEduQualId().getId());
 		Optional<TOccupationType> occupation = occupationRepo.findById(termInsuranceDetails.getOccupationId().getId());
-				
-		if(customer.isEmpty()) System.out.println("customer empty");
-		if(eduQual.isEmpty()) System.out.println("Edu empty");
-		if(occupation.isEmpty()) System.out.println("occu empty");
+
 		if(customer.isEmpty() || eduQual.isEmpty() || occupation.isEmpty()) {			
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"BAD_REQUEST");
 		}
@@ -87,8 +88,8 @@ public class TermInsuranceService implements ITermInsuranceService{
 		termInsuranceDetails.setOccupationId(occupation.get());
 		termInsuranceDetails.setCreatedBy(termInsuranceDetails.getCustomer().getFirstName());
 		termInsuranceDetails.setModifiedBy(termInsuranceDetails.getCustomer().getFirstName());
-				
-		System.out.println("termInsuranceDetails age ::"+termInsuranceDetails.getAge());
+		termInsuranceDetails.setMaxEligCover(calculation.getTotalEligibleCover());
+		
 		TLICustTermInsurance entity = tiRepo.save(termInsuranceDetails);
 		return TermInsuranceMapper.mapEntityToDto(entity);
 	}

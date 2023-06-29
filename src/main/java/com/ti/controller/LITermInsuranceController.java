@@ -18,7 +18,7 @@ import com.ti.model.TLICustTermInsurance;
 import com.ti.service.ITermInsuranceService;
 
 @RestController
-@RequestMapping("/termplan")
+@RequestMapping("/api/oneappabc/adityabirla/api/v1/lifeinsurance/termplan")
 public class LITermInsuranceController {
 
 	@Autowired
