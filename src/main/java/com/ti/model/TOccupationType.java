@@ -36,23 +36,23 @@ public class TOccupationType {
 	@SequenceGenerator(name = "t_occupation_type_seq_gen", sequenceName = "t_occupation_type_seq")
 	private Integer id;
 
-	@Column(name = "occupationType")
+	@Column(name = "occupationtype")
 	private String occupationType;
 
 	@Column(name = "state")
 	private String state;
 
-	@Column(name = "createdBy")
+	@Column(name = "createdby")
 	private String createdBy;
 
-	@Column(name = "createdDate")
+	@Column(name = "createddate")
 	@CreatedDate
 	private Instant createdDate;
 
-	@Column(name = "modifiedBy")
+	@Column(name = "modifiedby")
 	private String modifiedBy;
 
-	@Column(name = "modifiedDate")
+	@Column(name = "modifieddate")
 	@LastModifiedDate
 	private Instant modifiedDate;
 

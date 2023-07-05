@@ -42,7 +42,7 @@ public class TLICustTermInsurance {
 	@JoinColumn(name = "customerId")
 	private TCustomer customer;
 
-	@Column(name="insuredFor")
+	@Column(name="insuredfor")
 	private String insuredFor;
 	
 	@Column(name="count")
@@ -51,7 +51,7 @@ public class TLICustTermInsurance {
 	@Column(name="age")
 	private Integer age;
 	
-	@Column(name="annualIncome")
+	@Column(name="annualincome")
 	private Double annualIncome;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -62,44 +62,44 @@ public class TLICustTermInsurance {
 	@JoinColumn(name="occupationId_id")
 	private TOccupationType occupationId;
 	
-	@Column(name="locationPin")
+	@Column(name="locationpin")
 	private Integer locationPin;
 	
 	@Column(name="liabilities")
 	private short liabilities;
 	
-	@Column(name="liabilityAmount")
+	@Column(name="liabilityamount")
 	private Double liabilityAmount;
 	
-	@Column(name="existingCover")
+	@Column(name="existingcover")
 	private short existingCover;
 
-	@Column(name="existingCoverAmt")
+	@Column(name="existingcoveramt")
 	private Double existingCoverAmt;
 	
-	@Column(name="policyName")
+	@Column(name="policyname")
 	private String policyName;
 	
-	@Column(name="maxEligCover")
+	@Column(name="maxeligcover")
 	private Double maxEligCover;
 	
-	@Column(name="selectedCover")
+	@Column(name="selectedcover")
 	private Double selectedCover;
 	
-	@Column(name="yearlyPremium")
+	@Column(name="yearlypremium")
 	private Double yearlyPremium;
 	
-	@Column(name = "createdDate")
+	@Column(name = "createddate")
 	@CurrentTimestamp
 	private Instant createdDate;
 
-	@Column(name = "createdBy")
+	@Column(name = "createdby")
 	private String createdBy;
 
-	@Column(name = "modifiedBy")
+	@Column(name = "modifiedby")
 	private String modifiedBy;
 	
-	@Column(name = "modifiedDate")
+	@Column(name = "modifieddate")
 	@UpdateTimestamp
 	private Instant modifiedDate;
 

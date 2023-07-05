@@ -39,20 +39,20 @@ public class TEducationalQualification {
 	@JoinColumn(name = "customer_id")
 	private TCustomer customer;
 	
-	@Column(name="educationalQuali")
+	@Column(name="educationalquali")
 	private String educationalQuali;
 	
-	@Column(name = "createdBy")
+	@Column(name = "createdby")
 	private String createdBy;
 	
-	@Column(name = "createdDate")
+	@Column(name = "createddate")
 	@CreatedDate
 	private Instant createdDate;
 
-	@Column(name = "modifiedBy")
+	@Column(name = "modifiedby")
 	private String modifiedBy;
 	
-	@Column(name = "modifiedDate")
+	@Column(name = "modifieddate")
 	@LastModifiedDate
 	private Instant modifiedDate;
 
