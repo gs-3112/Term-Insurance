@@ -21,12 +21,12 @@ public class EducationalQualificationDto {
 	
 	Integer educationalQualiId;
 	String educationalQuali;	
-	boolean isActive;
+	String active;
 	
 	public EducationalQualificationDto(TEducationalQualification t) {
 		educationalQualiId = t.getId();
 		educationalQuali = t.getEducationalQuali();
-		isActive = t.isActive();
+		active = t.getActive();
 	}
 
 
@@ -43,12 +43,14 @@ public class EducationalQualificationDto {
 	public void setEducationalQuali(String educationalQuali) {
 		this.educationalQuali = educationalQuali;
 	}
-	public boolean isActive() {
-		return isActive;
+
+	public String getActive() {
+		return active;
 	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+
+	public void setActive(String active) {
+		this.active = active;
 	}
-	
+
 	
 }

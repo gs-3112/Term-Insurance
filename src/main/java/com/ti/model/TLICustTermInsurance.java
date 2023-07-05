@@ -104,7 +104,7 @@ public class TLICustTermInsurance {
 	private Instant modifiedDate;
 
 	@Column(name="active", nullable = false)
-	boolean active;
+	String active;
 
 	public Integer getId() {
 		return id;
@@ -258,14 +258,6 @@ public class TLICustTermInsurance {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -280,6 +272,14 @@ public class TLICustTermInsurance {
 
 	public void setAnnualIncome(Double annualIncome) {
 		this.annualIncome = annualIncome;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 	

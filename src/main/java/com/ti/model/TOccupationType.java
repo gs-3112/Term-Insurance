@@ -57,7 +57,7 @@ public class TOccupationType {
 	private Instant modifiedDate;
 
 	@Column(name = "active")
-	boolean active;
+	private String active;
 
 	
 	
@@ -109,20 +109,22 @@ public class TOccupationType {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
+	
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 }

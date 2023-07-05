@@ -42,7 +42,7 @@ public class TermInsuranceDetailsDto {
 	String createdBy;
 	String modifiedBy;
 	Instant modifiedDate;
-	boolean active;
+	String active;
 	
 	
 	public TermInsuranceDetailsDto(TLICustTermInsurance ti) {
@@ -62,14 +62,14 @@ public class TermInsuranceDetailsDto {
 		otd.setOccupationId(ot.getId());
 		otd.setOccupationType(ot.getOccupationType());
 		otd.setState(ot.getState());
-		otd.setActive(ot.isActive());
+		otd.setActive(ot.getActive());
 		this.occupationId = otd;
 		
 		TEducationalQualification eq = ti.getEduQualId();
 		EducationalQualificationDto eqd = new EducationalQualificationDto();
 		eqd.setEducationalQuali(eq.getEducationalQuali());
 		eqd.setEducationalQualiId(eq.getId());
-		eqd.setActive(eq.isActive());
+		eqd.setActive(eq.getActive());
 		this.eduQualId = eqd;
 		
 		this.locationPin =ti.getLocationPin();		
@@ -291,15 +291,15 @@ public class TermInsuranceDetailsDto {
 	}
 
 
-	public boolean isActive() {
+	public String getActive() {
 		return active;
 	}
 
 
-	public void setActive(boolean active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
-	
+
 	
 
 }

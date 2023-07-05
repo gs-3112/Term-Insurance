@@ -57,6 +57,6 @@ public class TEducationalQualification {
 	private Instant modifiedDate;
 
 	@Column(name="active")
-	boolean active;
+	String active;
 
 }

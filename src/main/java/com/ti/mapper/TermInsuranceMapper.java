@@ -42,7 +42,7 @@ public class TermInsuranceMapper {
 				.eduQualId(EducationalQualificationDto.builder()
 						.educationalQualiId(entity.getEduQualId().getId())
 						.educationalQuali(entity.getEduQualId().getEducationalQuali())
-						.isActive(entity.getEduQualId().isActive())
+						.active(entity.getEduQualId().getActive())
 						.build())
 				.occupationId(OccupationTypeDto.builder()
 						.occupationId(entity.getOccupationId().getId())

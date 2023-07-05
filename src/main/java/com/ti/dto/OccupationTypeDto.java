@@ -25,13 +25,13 @@ public class OccupationTypeDto {
 	Instant createDate;
 	String modifiedBy;
 	Instant modifiedDate;
-	boolean active;
+	String active;
 
 	public OccupationTypeDto(TOccupationType t) {
 		occupationId = t.getId();
 		occupationType = t.getOccupationType();
 		state = t.getState();
-		active = t.isActive();
+		active = t.getActive();
 		createdBy = t.getCreatedBy();
 		createDate = t.getCreatedDate();
 		modifiedBy = t.getModifiedBy();
@@ -95,12 +95,12 @@ public class OccupationTypeDto {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public boolean isActive() {
+	public String getActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
-
+	
 }
