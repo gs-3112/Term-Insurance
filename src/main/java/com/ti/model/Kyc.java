@@ -1,8 +1,6 @@
 package com.ti.model;
 
-import java.time.Instant;
-
-import org.hibernate.annotations.CurrentTimestamp;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,50 +14,55 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "T_KYC")
+@Table(name = "T_Kyc") 
 public class Kyc {
 	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_kyc_seq_gen")
-	@SequenceGenerator(name = "t_kyc_seq_gen", sequenceName = "t_kyc_seq")
-	Integer id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "kyc_seq_gen")
+    @SequenceGenerator(name = "kyc_seq_gen", sequenceName = "kyc_seq")
+	private long id;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id")
-	TCustomer customer;
+	@JsonBackReference
+    private TCustomer customer;
 	
-	@Column(name="permanentAddress")
-	String permanentAddress;
-
-	@Column(name="digilockerStatus")
-	Integer digilockerStatus;
+	 
 	
-	@Column(name = "digilockerCreatedDate")
-	@CurrentTimestamp
-	private Instant digilockerCreatedDate;
+	@Column(name = "PermanentAddress")
+	private String permanentAddress;
 	
-	@Column(name = "videoKYC")
+	@Column(name = "DigilockerStatus")
+	private String digilockerStatus;
+	
+	@Column(name = "DigilockerCreatedDate")
+	private String digilockerCreatedDate;
+	
+	@Column(name = "VideoKYC")
 	private String videoKYC;
 	
-	@Column(name = "lastFetchedDate")
-	@CurrentTimestamp
-	private Instant lastFetchedDate;
+	@Column(name = "LastFetchedDT")
+	private String lastFetchedDT;
 
 	
-	public Integer getId() {
+	
+	
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public TCustomer getCustomer() {
+	public TCustomer getTCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(TCustomer customer) {
-		this.customer = customer;
+	public void setTCustomer(TCustomer TCustomer) {
+		this.customer = TCustomer;
 	}
 
 	public String getPermanentAddress() {
@@ -70,19 +73,19 @@ public class Kyc {
 		this.permanentAddress = permanentAddress;
 	}
 
-	public Integer getDigilockerStatus() {
+	public String getDigilockerStatus() {
 		return digilockerStatus;
 	}
 
-	public void setDigilockerStatus(Integer digilockerStatus) {
+	public void setDigilockerStatus(String digilockerStatus) {
 		this.digilockerStatus = digilockerStatus;
 	}
 
-	public Instant getDigilockerCreatedDate() {
+	public String getDigilockerCreatedDate() {
 		return digilockerCreatedDate;
 	}
 
-	public void setDigilockerCreatedDate(Instant digilockerCreatedDate) {
+	public void setDigilockerCreatedDate(String digilockerCreatedDate) {
 		this.digilockerCreatedDate = digilockerCreatedDate;
 	}
 
@@ -94,24 +97,28 @@ public class Kyc {
 		this.videoKYC = videoKYC;
 	}
 
-	public Instant getLastFetchedDate() {
-		return lastFetchedDate;
+	public String getLastFetchedDT() {
+		return lastFetchedDT;
 	}
 
-	public void setLastFetchedDate(Instant lastFetchedDate) {
-		this.lastFetchedDate = lastFetchedDate;
+	public void setLastFetchedDT(String lastFetchedDT) {
+		this.lastFetchedDT = lastFetchedDT;
 	}
 
-	public Kyc(Integer id, TCustomer customer, String permanentAddress, Integer digilockerStatus,
-			Instant digilockerCreatedDate, String videoKYC, Instant lastFetchedDate) {
+	public Kyc() {
+		super();
+	}
+
+	public Kyc(long id, TCustomer TCustomer, String permanentAddress, String digilockerStatus,
+			String digilockerCreatedDate, String videoKYC, String lastFetchedDT) {
 		super();
 		this.id = id;
-		this.customer = customer;
+		this.customer = TCustomer;
 		this.permanentAddress = permanentAddress;
 		this.digilockerStatus = digilockerStatus;
 		this.digilockerCreatedDate = digilockerCreatedDate;
 		this.videoKYC = videoKYC;
-		this.lastFetchedDate = lastFetchedDate;
+		this.lastFetchedDT = lastFetchedDT;
 	}
 	
 }
